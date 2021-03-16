@@ -1,5 +1,6 @@
 class Enemy << Splite
     def hit(obj)
+        vanish
     end
 end
 
@@ -12,6 +13,6 @@ end
 
 class Enemy_2 < Enemy
     def update
-        self.x += 1
+        self.x += 2
     end
 end
