@@ -6,8 +6,6 @@ module Game
             @image = img
         end
 
-        def draw
-            Window.draw()
         def hit(Mori)
             vanish
         end
@@ -25,3 +23,4 @@ module Game
             @x -= 4
         end
     end
+end
