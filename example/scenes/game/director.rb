@@ -7,6 +7,8 @@ module Game
     # 初期化
     def initialize
       player_img =  Image.load("images/player.png")
+      enemy1_img =  Image.load("images/Same.png")
+      enemy2_img =  Image.load("images/Shathi.png")
       @map = Map.new(50, 50, 1.4, 5, 15)
       @map.set_scroll_direction(1, 1)
       @player = Player.new(10, 10, player_img, @map)
