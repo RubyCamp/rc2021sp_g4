@@ -1,18 +1,27 @@
-class Enemy < Sprite
-    def hit(obj)
-        vanish
-    end
-end
+module Game
+    class Enemy
+        def initialize( x, y, img)
+            @x = x
+            @y = y
+            @image = img
+        end
 
-class Enemy_1 < Enemy
-    def update
-        self.x -= 1
-        self.y -= 1
+        def draw
+            Window.draw()
+        def hit(Mori)
+            vanish
+        end
     end
-end
 
-class Enemy_2 < Enemy
-    def update
-        self.x -= 2
+    class Enemy_1 < Enemy
+        def update
+            @x -= 2
+            @y -= 2
+        end
     end
-end
+
+    class Enemy_2 < Enemy
+        def update
+            @x -= 4
+        end
+    end
