@@ -7,9 +7,13 @@ module Game
     # 初期化
     def initialize
       player_img =  Image.load("images/player.png")
+      enemy1_img =  Image.load("images/Same.png")
+      enemy2_img =  Image.load("images/Shathi.png")
       @map = Map.new(50, 50, 2, 5, 15)
       @map.set_scroll_direction(1, 1)
       @player = Player.new(10, 10, player_img, @map)
+      @enemy1 = Enemy_1.new(rand(400) + rand(200), rand(300) + rand(200), enemy1_img, @map)
+      @enemy2 = Enemy_2.new(rand(400) + rand(200), rand(300) + rand(200), enemy2_img, @map)
       @font = Font.new(28)
       @debug_box = RenderTarget.new(32, 32, C_YELLOW)
     end
@@ -31,6 +35,8 @@ module Game
       @map.draw
       @debug_boxes += @player.update(Input.x)
       @player.draw
+      @enemy1.draw
+      @enemy2.draw
       title_draw
 
       if DEBUG_MODE
