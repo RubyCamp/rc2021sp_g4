@@ -2,6 +2,7 @@ module Game
   # ゲームマップ
   class Map  < MapBase
     WALL_CHIP_WEIGHT = 1  # 通過不可マップチップの重み番号
+    WAVE_CHIP_WEIGHT = 2  # 触れると消えるマップチップの重み番号
 
     attr_accessor :scroll_direction_x, :scroll_direction_y
 
@@ -34,6 +35,13 @@ module Game
       cx = chip_num.to_i % MapChip::CHIP_SIZE
       @chip_weights[cy][cx].to_i
     end
+
+    # 注意！未完成  playerが波に当たると背景の波が海水に代わるメソッド
+    # def change_chip(pos, chip_num)
+    #   y = pos[1]
+    #   x = pos[0]
+    #   @chip_weights[y][x].to_i = chip_num  #＜＝＝ここが分からない
+    # end
 
     private
 
