@@ -15,7 +15,7 @@ module Game
     def shot
     end
 
-    # プレイヤーのマップ上の座標に対するマップチップの通過可否判定
+    # モリのマップ上の座標に対するマップチップの通過可否判定
     def check_mori_interaction
       # X軸方向の判定
       if self.x >= 0
@@ -30,6 +30,7 @@ module Game
       else
         @collision_top = check_y_direction([@map.root_x + self.x + MapChip::CHIP_SIZE / 2, @map.root_y + self.y], -1) # 上
       end
+      
       if @collision_bottom || @collision_top || @collision_left || @collision_right
         self.vanish #壁に当たると消える
       end
@@ -63,6 +64,13 @@ module Game
         return true
       end
       return false
+    end
+    
+    # 画面の端に当たるとモリが消える
+    def check_mori_map_width
+      if @@dx == 0
+        self.vanish
+      end
     end
 
     # 画面の端に当たるとモリが消える
