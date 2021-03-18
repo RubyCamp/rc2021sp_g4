@@ -14,13 +14,14 @@ module Game
       @player_img =  Image.load("images/Player_1.png")
       @mori_img = Image.load("images/Mori.png")
       #@mori_img = Sprite.new( Image.load("images/Mori.png"))
-      @moris = []
       @map = Map.new(50, 50, 1.4, 5, 15)
       @map.set_scroll_direction(1, 1)
       @player = Player.new(10, 10, @player_img, @map)
+
+      @moris = []
+
       @font = Font.new(28)
       @debug_box = RenderTarget.new(32, 32, C_YELLOW)
-
       @enemies1 = []
       ENEMY_COUNT.times do 
         @enemies1 << Enemy_1.new(rand(400) + rand(200), rand(300) + rand(200), @enemy1_img, @map)
@@ -46,10 +47,6 @@ module Game
 
       if Input.key_push?(K_C)
         @moris << Harpoon.new(@player.x, @player.y, @mori_img, @map)
-      end
-
-      if Input.key_push?(K_Z) then  # Zキーで再生
-        @sound.play
       end
 
       @map.update
