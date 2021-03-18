@@ -6,12 +6,17 @@ module Game
 
     # 初期化
     def initialize
-      player_img =  Image.load("images/player.png")
+      @player_img =  Image.load("images/Player_1.png")
+      @mori_img = Image.load("images/Mori.png")
       @map = Map.new(50, 50, 1.4, 5, 15)
       @map.set_scroll_direction(1, 1)
-      @player = Player.new(10, 10, player_img, @map)
+      @player = Player.new(10, 10, @player_img, @map)
+
+      @moris = []
+
       @font = Font.new(28)
       @debug_box = RenderTarget.new(32, 32, C_YELLOW)
+
     end
 
     # Scene遷移時に自動呼出しされる規約メソッド
@@ -27,10 +32,21 @@ module Game
         @player.start_jump
       end
 
+      if Input.key_push?(K_C)
+        p "px: #{@player.x}"
+        @moris << Harpoon.new(@player.x, @player.y, @mori_img, @map)
+      end
+
       @map.update
       @map.draw
       @debug_boxes += @player.update(Input.x)
       @player.draw
+      
+      @moris.each do |mori|
+        mori.update
+        mori.draw
+      end
+
       title_draw
 
       if DEBUG_MODE

@@ -4,6 +4,7 @@ module Game
     include MathHelper # 他のプログラムと共用する数学系ヘルパーメソッドを読み込む
 
     SPEED_LIMIT_X = 24 # X軸方向の速度上限
+    attr_accessor :x, :y
 
     # 初期化
     # 未考慮ポイント１: マップオブジェクトの参照を受け取って内部で保持している（マップと密結合している）。
@@ -19,6 +20,9 @@ module Game
       @speed_y = 0
       @jump_power = 0
       @jump_angle = 0
+###
+      # @harpoons = []
+###
     end
 
     # 1フレームにおけるプレイヤーの挙動更新
@@ -49,6 +53,16 @@ module Game
       end
 
       @debug_boxes # Directorに表示させたいデバッグボックスの座標群を返す
+###
+      # pushed_z if Input.key_push?(K_Z)
+      # pushed_x if Input.key_push?(K_X)
+      # pushed_c if Input.key_push?(K_C)
+
+      # @harpoons.each do |harpoon|
+      #   @harpoon.update
+      #   @harpoon.draw
+      # end
+###
     end
 
     # プレイヤーキャラクタを現在位置に描画
@@ -144,9 +158,9 @@ module Game
         return true
       end
       # 注意！未完成 playerが波に当たると背景の波が海水に変わる処理
-      # if chip_weight == Map::WAVE_CHIP_WEIGHT
-      #   @map.change_chip(player_pos, 0)
-      # end
+       if chip_weight == Map::WAVE_CHIP_WEIGHT
+         @map.change_chip(player_pos, 0)
+       end
 
       return false
     end
@@ -182,5 +196,19 @@ module Game
     def jumping?
       @jump_power > 0
     end
+###
+    #ボタンを押したときにモリを出す
+    # def pushed_z
+    #   @harpoons << Harpoon.new(self.x + @map.root_x + @x + 32, self.y + @map.root_y + @y)
+    # end
+  
+    # def pushed_x
+    #   @harpoons << Harpoon.new(self.x + @map.root_x + @x + 32, self.y + @map.root_y + @y)
+    # end
+  
+    # def pushed_c
+    #   @harpoons << Harpoon.new(self.x + @map.root_x + @x + 32, self.y + @map.root_y + @y)
+    # end
+###  
   end
 end
