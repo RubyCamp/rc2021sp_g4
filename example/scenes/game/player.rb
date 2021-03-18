@@ -157,7 +157,7 @@ module Game
         @x = player_view[0].to_i - @map.root_x - (MapChip::CHIP_SIZE * offset)
         return true
       end
-      # 注意！未完成 playerが波に当たると背景の波が海水に変わる処理
+      # playerが波に当たると背景の波が海水に変わる処理
        if chip_weight == Map::WAVE_CHIP_WEIGHT
          @map.change_chip(player_pos, 0)
        end

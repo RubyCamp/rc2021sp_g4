@@ -8,6 +8,7 @@ module Game
     def initialize
       @player_img =  Image.load("images/Player_1.png")
       @mori_img = Image.load("images/Mori.png")
+      #@mori_img = Sprite.new( Image.load("images/Mori.png"))
       @map = Map.new(50, 50, 1.4, 5, 15)
       @map.set_scroll_direction(1, 1)
       @player = Player.new(10, 10, @player_img, @map)
@@ -33,7 +34,6 @@ module Game
       end
 
       if Input.key_push?(K_C)
-        p "px: #{@player.x}"
         @moris << Harpoon.new(@player.x, @player.y, @mori_img, @map)
       end
 
@@ -46,6 +46,7 @@ module Game
         mori.update
         mori.draw
       end
+      @moris.delete_if{|mori| mori.vanished? }
 
       title_draw
 
