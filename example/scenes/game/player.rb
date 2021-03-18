@@ -12,7 +12,7 @@ module Game
       @x = x
       @y = y
       @image = img
-      @image.set_color_key(C_WHITE) # 指定された画像のC_WHITE（白色）部分を透明化
+      #@image.set_color_key(C_WHITE) # 指定された画像のC_WHITE（白色）部分を透明化
       @map = map
       @g = 1
       @speed_x = 0
