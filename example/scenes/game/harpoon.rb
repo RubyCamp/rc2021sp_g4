@@ -1,7 +1,7 @@
 module Game
   class Harpoon < Sprite
 
-    attr_accessor :x, :y
+    #attr_accessor :x, :y
 
     def initialize(x, y, img, map)
       self.x = x
@@ -12,20 +12,23 @@ module Game
       super(self.x, self.y, self.image)
     end
 
+    def shot
+    end
+
     # モリのマップ上の座標に対するマップチップの通過可否判定
     def check_mori_interaction
       # X軸方向の判定
       if self.x >= 0
-        @collision_right = check_x_direction([@map.root_x + @x + MapChip::CHIP_SIZE, @map.root_y + @y + MapChip::CHIP_SIZE / 2], 1) # 右
+        @collision_right = check_x_direction([@map.root_x + self.x + MapChip::CHIP_SIZE, @map.root_y + self.y + MapChip::CHIP_SIZE / 2], 1) # 右
       else
-        @collision_left = check_x_direction([@map.root_x + @x, @map.root_y + @y + MapChip::CHIP_SIZE / 2], -1) # 右
+        @collision_left = check_x_direction([@map.root_x + self.x, @map.root_y + self.y + MapChip::CHIP_SIZE / 2], -1) # 右
       end
     
       # y軸方向の判定
       if self.y >= 0
-        @collision_bottom = check_y_direction([@map.root_x + @x + MapChip::CHIP_SIZE / 2, @map.root_y + @y + MapChip::CHIP_SIZE], 1) # 下
+        @collision_bottom = check_y_direction([@map.root_x + self.x + MapChip::CHIP_SIZE / 2, @map.root_y + self.y + MapChip::CHIP_SIZE], 1) # 下
       else
-        @collision_top = check_y_direction([@map.root_x + @x + MapChip::CHIP_SIZE / 2, @map.root_y + @y], -1) # 上
+        @collision_top = check_y_direction([@map.root_x + self.x + MapChip::CHIP_SIZE / 2, @map.root_y + self.y], -1) # 上
       end
       
       if @collision_bottom || @collision_top || @collision_left || @collision_right
@@ -63,6 +66,13 @@ module Game
       return false
     end
     
+    # 画面の端に当たるとモリが消える
+    def check_mori_map_width
+      if @@dx == 0
+        self.vanish
+      end
+    end
+
     # 画面の端に当たるとモリが消える
     def check_mori_map_width
       if @@dx == 0
