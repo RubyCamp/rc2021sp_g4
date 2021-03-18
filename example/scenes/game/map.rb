@@ -36,11 +36,11 @@ module Game
       @chip_weights[cy][cx].to_i
     end
 
-    # 注意！未完成  playerが波に当たると背景の波が海水に代わるメソッド
+    # playerが波に当たると背景の波が海水に代わるメソッド
     def change_chip(pos, chip_num)
       y = pos[1]
       x = pos[0]
-      self.map_array[y][x] = chip_num  #＜＝＝ここが分からない
+      self.map_array[y][x] = chip_num  
     end
 
     private
