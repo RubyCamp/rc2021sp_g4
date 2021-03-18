@@ -4,25 +4,25 @@ module Game
     attr_accessor :x, :y
 
     def initialize(x, y, img, map)
-      @x = x
-      @y = y
-      @image = img
+      self.x = x
+      self.y = y
+      self.image = img
       # @image.set_color_key(C_WHITE)
       @map = map
-      super(@x, @y, @image)
+      super(self.x, self.y, self.image)
     end
 
     # モリのマップ上の座標に対するマップチップの通過可否判定
     def check_mori_interaction
       # X軸方向の判定
-      if @x >= 0
+      if self.x >= 0
         @collision_right = check_x_direction([@map.root_x + @x + MapChip::CHIP_SIZE, @map.root_y + @y + MapChip::CHIP_SIZE / 2], 1) # 右
       else
         @collision_left = check_x_direction([@map.root_x + @x, @map.root_y + @y + MapChip::CHIP_SIZE / 2], -1) # 右
       end
     
       # y軸方向の判定
-      if @y >= 0
+      if self.y >= 0
         @collision_bottom = check_y_direction([@map.root_x + @x + MapChip::CHIP_SIZE / 2, @map.root_y + @y + MapChip::CHIP_SIZE], 1) # 下
       else
         @collision_top = check_y_direction([@map.root_x + @x + MapChip::CHIP_SIZE / 2, @map.root_y + @y], -1) # 上
@@ -40,7 +40,7 @@ module Game
       chip_weight = @map.get_chip_weight(chip_num)
       if chip_weight == Map::WALL_CHIP_WEIGHT
         player_view = @map.convert_map_to_win(player_pos)
-        @x = player_view[0].to_i - @map.root_x - (MapChip::CHIP_SIZE * offset)
+        self.x = player_view[0].to_i - @map.root_x - (MapChip::CHIP_SIZE * offset)
         return true
       end
       # playerが波に当たると背景の波が海水に変わる処理
@@ -57,7 +57,7 @@ module Game
       chip_weight = @map.get_chip_weight(chip_num)
       if chip_weight == Map::WALL_CHIP_WEIGHT
         player_view = @map.convert_map_to_win(player_pos)
-        @y = player_view[1].to_i - @map.root_y - (MapChip::CHIP_SIZE * offset)
+        self.y = player_view[1].to_i - @map.root_y - (MapChip::CHIP_SIZE * offset)
         return true
       end
       return false
@@ -72,16 +72,16 @@ module Game
 
     def update
       @@dx = 4
-      tmp_x = @x + @@dx
+      tmp_x = self.x + @@dx
       @@dx = 0 if tmp_x > @map.width - MapChip::CHIP_SIZE || tmp_x < 0
-      @x += @@dx
+      self.x += @@dx
       check_mori_interaction
       check_mori_map_width
     end
 
     def draw
       return if self.vanished? #vanishのときに消える
-      Window.draw(@map.root_x + @x, @map.root_y + @y, @image)
+      Window.draw(@map.root_x + self.x, @map.root_y + self.y, self.image)
     end
   end
 end

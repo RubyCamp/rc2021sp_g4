@@ -17,6 +17,7 @@ module Game
 
       @font = Font.new(28)
       @debug_box = RenderTarget.new(32, 32, C_YELLOW)
+      @sound = Sound.new("./music/futta-dream.wav")  # sound.wav読み込み
 
     end
 
@@ -35,6 +36,10 @@ module Game
 
       if Input.key_push?(K_C)
         @moris << Harpoon.new(@player.x, @player.y, @mori_img, @map)
+      end
+
+      if Input.key_push?(K_Z) then  # Zキーで再生
+        @sound.play
       end
 
       @map.update
