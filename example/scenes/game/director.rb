@@ -58,8 +58,9 @@ module Game
         enemy1.update
         enemy1.draw
       end
+      Sprite.check(@moris, @enemies1)
       @enemies1.delete_if{|enemy1| enemy1.vanished? }
-      
+
       if @enemies1.size < ENEMY_COUNT
          @enemies1 << Enemy_1.new(rand(400) + rand(200), rand(300) + rand(200), @enemy1_img, @map)
       end
@@ -68,11 +69,13 @@ module Game
         enemy2.update
         enemy2.draw
       end
-      @enemy2.delete_if{|enemy2| enemy2.vanished? }
-      
+      Sprite.check(@moris, @enemies2)
+      @enemies2.delete_if{|enemy2| enemy2.vanished? }
+
       if @enemies2.size < ENEMY_COUNT
-         @enemies2 << Enemy_2.new(rand(400) + rand(200), rand(300) + rand(200), @enemy2_img, @map)
+         @enemies2 << Enemy_2.new(rand(400) + rand(200) , rand(300) + rand(200), @enemy2_img, @map)
       end
+      
         
       @moris.each do |mori|
         mori.update
