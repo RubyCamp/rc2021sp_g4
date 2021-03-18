@@ -14,6 +14,10 @@ require_relative 'lib/map_base'
 require_relative 'scenes/game/director'
 require_relative 'scenes/game/map'
 require_relative 'scenes/game/player'
+require_relative 'scenes/game/enemy'
+
+require_relative 'scenes/title/director'
+require_relative 'scenes/game_end/director'
 
 require_relative 'scenes/map_editor/director'
 require_relative 'scenes/map_editor/map'
@@ -24,9 +28,11 @@ Window.width = 1024
 Window.height = 768
 Window.caption = "RubyCamp 2021SP Sample1"
 
+Scene.add(Title::Director.new, :title)
 Scene.add(Game::Director.new, :game)
 Scene.add(MapEditor::Director.new, :map_editor)
-Scene.move_to(:game)
+Scene.add(Game_end::Director.new, :game_end)
+Scene.move_to(:title)
 
 Window.loop do
   break if Input.key_push?(K_ESCAPE)
