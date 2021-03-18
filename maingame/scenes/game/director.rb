@@ -30,12 +30,18 @@ module Game
       ENEMY_COUNT.times do 
         @enemies2 << Enemy_2.new(rand(400) + rand(200), rand(300) + rand(200), @enemy2_img, @map)
       end
+
+      @sound = Sound.new("music/ナイフを投げる.wav")
+      @bgm = Sound.new("music/under-the-sea-1.wav")
     end
 
     # Scene遷移時に自動呼出しされる規約メソッド
     def reload
       @map.reload_map_array
+      @bgm.play
     end
+
+    
 
     # 1フレーム描画
     def play
@@ -47,7 +53,10 @@ module Game
 
       if Input.key_push?(K_C)
         @moris << Harpoon.new(@player.x, @player.y, @mori_img, @map)
+        @sound.play
       end
+
+      
 
       @map.update
       @map.draw
