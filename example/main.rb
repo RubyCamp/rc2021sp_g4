@@ -33,7 +33,7 @@ Scene.add(Title::Director.new, :title)
 Scene.add(Game::Director.new, :game)
 Scene.add(MapEditor::Director.new, :map_editor)
 Scene.add(Game_end::Director.new, :game_end)
-Scene.move_to(:game)
+Scene.move_to(:title)
 
 Window.loop do
   break if Input.key_push?(K_ESCAPE)
