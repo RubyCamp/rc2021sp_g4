@@ -7,22 +7,23 @@ module Game
             @map = map
         end
       
-        def check_map_interaction
+        def check_enemy_interaction
             # X軸方向の判定
-            if @input_x >= 0
+            if @x >= 0
               @collision_right = check_x_direction([@map.root_x + @x + MapChip::CHIP_SIZE, @map.root_y + @y + MapChip::CHIP_SIZE / 2], 1) # 右
             else
               @collision_left = check_x_direction([@map.root_x + @x, @map.root_y + @y + MapChip::CHIP_SIZE / 2], -1) # 左
             end
       
             # y軸方向の判定
-            if @dy >= 0
+            if @y >= 0
               @collision_bottom = check_y_direction([@map.root_x + @x + MapChip::CHIP_SIZE / 2, @map.root_y + @y + MapChip::CHIP_SIZE], 1) # 下
             else
               @collision_top = check_y_direction([@map.root_x + @x + MapChip::CHIP_SIZE / 2, @map.root_y + @y], -1) # 上
             end
 
-            if@collision_bottom || @collision_top || @collision_left || @collision_right
+            if  @x || @y == @collision_bottom || @collision_top || @collision_left || @collision_right
+                self.vanish
             end
         end
       
@@ -56,11 +57,8 @@ module Game
                 return false
         end
 
-        def hit
-            vanish
-        end
-
         def draw
+            return if self.vanished?
             Window.draw(@map.root_x + @x, @map.root_y + @y, @image)
         end
     end
@@ -75,15 +73,17 @@ module Game
             dy = 0 if tmp_x > @map.height - MapChip::CHIP_SIZE || tmp_y < 0
             @x -= dx
             @y -= dy
+            check_enemy_interaction
         end
     end
 
     class Enemy_2 < Enemy
         def update
-            dx = 4
+            dx = 3
             tmp_x = @x - dx
             dx = 0 if tmp_x > @map.width - MapChip::CHIP_SIZE || tmp_x < 0
             @x -= dx
+            check_enemy_interaction
         end
     end
 end

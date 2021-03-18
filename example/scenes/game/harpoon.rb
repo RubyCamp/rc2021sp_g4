@@ -20,6 +20,7 @@ module Game
     end
 
     def draw
+      return if self.vanished?
       Window.draw(@map.root_x + @x, @map.root_y + @y, @image)
     end
   end
