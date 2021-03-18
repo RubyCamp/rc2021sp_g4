@@ -6,9 +6,7 @@ module Game
             @image = img
         end
 
-        def hit(Mori)
-            vanish
-        end
+ 
     end
 
     class Enemy_1 < Enemy
