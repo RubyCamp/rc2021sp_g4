@@ -11,7 +11,7 @@ module Title
         def play
             Window.draw_font(300, 150, "PUSH SPACE KEY!", @font)
             Window.draw(300, 100, @image)
-            Scene.move_to(:game) if Input.key_push?(k_SPACE)
+            Scene.move_to(:game) if Input.key_push?(K_SPACE)
         end
     end
 end
